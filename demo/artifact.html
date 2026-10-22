@@ -1,0 +1,366 @@
+<title>Spooner Street Walkabout</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+[hidden]{display:none!important}#hud .panel{text-align:left}#hud #bar,#hud #menu,#hud #street{text-align:center}
+/* Layout: a quiet start card over a full-bleed WebGL game view. Palette: slate ink on cool paper, one signal blue. */
+:root{--bg:#eef2f6;--fg:#1b2733;--muted:#5a6b7b;--card:#fff;--line:#cdd8e2;--accent:#1f6fb2;--accent-fg:#fff;--err:#b3261e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171e;--fg:#e6edf3;--muted:#93a4b4;--card:#18222c;--line:#2c3a47;--accent:#5aaaf0;--accent-fg:#08121c;--err:#ff8a80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10171e;--fg:#e6edf3;--muted:#93a4b4;--card:#18222c;--line:#2c3a47;--accent:#5aaaf0;--accent-fg:#08121c;--err:#ff8a80;color-scheme:dark}
+body{background:var(--bg);color:var(--fg)}
+#start{min-height:100%;display:grid;place-items:center;padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font:15px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+#start .card{width:min(520px,100%);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:28px;display:grid;gap:16px}
+#start h1{margin:0;font:600 26px/1.2 "IBM Plex Sans",system-ui,sans-serif;text-wrap:balance}
+#start p{margin:0;color:var(--muted);max-width:65ch}
+#start code{font:13px "IBM Plex Mono",ui-monospace,monospace;background:var(--bg);padding:1px 5px;border-radius:4px}
+#start label.btn{justify-self:start;background:var(--accent);color:var(--accent-fg);padding:10px 18px;border-radius:8px;font-weight:600;cursor:pointer}
+#start label.btn:focus-within{outline:3px solid var(--fg);outline-offset:2px}
+#start input{position:absolute;opacity:0;width:1px;height:1px}
+#err{color:var(--err);min-height:1.2em}
+#start dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13px;color:var(--muted)}#start dt{font-weight:600;color:var(--fg)}#start dd{margin:0}
+
+:root{--ui:#25435f;--ui2:#3b6a93;--gold:#f3b21b}
+
+*{box-sizing:border-box}html,body{height:100%}body.play{overflow:hidden;font:600 12px/1.3 system-ui,sans-serif;color:#fff;background:#9fd2f2}
+#hud .panel,#hud .pill,#load{font:600 12px/1.3 system-ui,sans-serif}#gl[hidden]{display:none}
+canvas#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+.panel{position:fixed;background:rgba(32,62,92,.88);border:1px solid #6d9bc4;border-radius:6px}
+#cash{left:10px;top:8px;display:flex;gap:8px}
+.pill{background:#f4f4f0;color:#333;border-radius:14px;padding:3px 12px 3px 10px;font-size:14px;font-weight:800;border:2px solid #fff;box-shadow:0 1px 2px #0006}
+.pill b{color:#2e8b3a}.pill.g b{color:#c88a00}
+#mini{right:10px;top:10px;width:150px}#mini canvas{display:block;width:100%;height:110px;border-radius:6px 6px 0 0}
+#street{text-align:center;padding:4px 0;letter-spacing:.5px}
+#quest{right:10px;top:170px;width:190px;padding:8px}#quest h4{margin:0 0 6px;font-size:12px}
+#quest li{list-style:none;margin:0 0 5px;padding-left:18px;position:relative;font-weight:500}
+#quest li:before{content:"";position:absolute;left:0;top:1px;width:11px;height:11px;background:#fff;border-radius:2px}
+#quest li.d:before{background:#7ad36a}
+#quest ul{margin:0;padding:0}
+#chat{left:10px;bottom:90px;width:300px;height:130px;padding:6px;font-weight:500;overflow:hidden}
+#chat .tab{display:inline-block;background:#f0a020;color:#fff;border-radius:6px 6px 0 0;padding:1px 8px;margin:-6px 0 4px -6px;font-size:10px}
+#portrait{left:6px;bottom:6px;display:flex;align-items:center;gap:6px;border:0;background:none}
+#portrait .face{width:62px;height:62px;border-radius:50%;background:#f3c7a0;border:4px solid #26527a;display:grid;place-items:center;font-size:30px}
+#portrait .hp{background:#d33;border-radius:12px;padding:2px 8px;font-weight:800}
+#bar{left:50%;transform:translateX(-50%);bottom:8px;display:flex;gap:4px;padding:6px;align-items:center}
+.slot{width:46px;height:46px;border:2px solid #20405c;border-radius:6px;background:#3a6788;display:grid;place-items:center;color:#a9c7e0;font-size:10px}
+.slot.on{background:#8ac26b;color:#fff}
+#menu{right:10px;bottom:8px;background:#46a6e0;border-radius:14px 14px 0 0;padding:8px 18px;font-weight:800}
+#hint{left:50%;top:10px;transform:translateX(-50%);padding:6px 12px;text-align:center}
+#load{position:fixed;inset:0;display:grid;place-items:center;background:#15324a;z-index:9;text-align:center}
+#load div{max-width:420px}#bar2{height:8px;background:#0006;border-radius:4px;margin-top:10px;overflow:hidden}#bar2 i{display:block;height:100%;width:0;background:var(--gold)}
+
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<div id="start"><div class="card">
+<h1>Spooner Street Walkabout</h1>
+<p>A walkable, clean-room WebGL demo of the Suburbs zones from your Family Guy Online data dump. This page contains only the engine. Game files stay on your computer and are read in your browser; nothing is uploaded.</p>
+<label class="btn" for="pick">Choose repository folder<input id="pick" type="file" webkitdirectory multiple></label>
+<div id="err" role="alert"></div>
+<dl><dt>Pick</dt><dd>The repo root that contains <code>Mesh/</code> and <code>Texture2D/</code>. Your browser may ask to confirm reading the files.</dd>
+<dt>Move</dt><dd>WASD, Shift to run, Space to jump</dd><dt>Camera</dt><dd>Drag, or Q and E; wheel to zoom</dd></dl>
+</div></div>
+<canvas id="gl" hidden></canvas>
+<div id="load" hidden><div><h2 style="margin:0 0 6px">Loading Spooner Street…</h2><div id="lt">fetching manifest</div><div id="bar2"><i id="lp"></i></div></div></div>
+<div id="hud" hidden>
+<div class="panel pill-wrap" id="cash" style="background:none;border:0"><div class="pill"><b>$</b> 0</div><div class="pill g"><b>●</b> 175</div></div>
+<div class="panel" id="mini"><canvas id="mm" width="150" height="110"></canvas><div id="street">SPOONER STREET</div></div>
+<div class="panel" id="quest"><h4>INDOOR HOT AIR BALLOON</h4><ul>
+<li class="d">Get some Scrap Nylon outside the Little Clam Preschool</li>
+<li class="d">Get a Propane Tank outside the Abandoned House</li>
+<li>Get a Flint Spark Lighter from the BBQ</li></ul></div>
+<div class="panel" id="chat"><span class="tab">GENERAL</span><div id="log"></div></div>
+<div class="panel" id="portrait"><div class="face">🎩</div><div class="hp">♥ 100%</div></div>
+<div class="panel" id="bar"></div>
+<div class="panel" id="menu">MAIN MENU</div>
+<div class="panel" id="hint">WASD move · Shift run · drag mouse / Q,E rotate camera · wheel zoom · Space jump</div>
+</div>
+<script>
+const MANIFEST = {"render":[{"mesh":"Mesh/B2_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"B2_bark01"},{"mesh":"Mesh/B2_chainlink_geo.obj","tex":"Texture2D/chainlink_col.png","name":"B2_chainlink"},{"mesh":"Mesh/B2_colourPaletteSubrubs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B2_colourPaletteSubrubs"},{"mesh":"Mesh/B2_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B2_colourPalette"},{"mesh":"Mesh/B2_delorian_geo.obj","tex":"Texture2D/delorean_col.png","name":"B2_delorian"},{"mesh":"Mesh/B2_detailRoofing_geo.obj","tex":"Texture2D/detailRoofing_dtl.png","name":"B2_detailRoofing"},{"mesh":"Mesh/B2_dirtBike_geo.obj","tex":"Texture2D/peterDirtBike_col.png","name":"B2_dirtBike"},{"mesh":"Mesh/B2_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"B2_foliage01"},{"mesh":"Mesh/B2_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"B2_rock01"},{"mesh":"Mesh/B2_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"B2_signs"},{"mesh":"Mesh/B2_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"B2_tree01"},{"mesh":"Mesh/B2_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"B2_tree03"},{"mesh":"Mesh/B3__rock01_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B3__rock01"},{"mesh":"Mesh/B3_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"B3_bark01"},{"mesh":"Mesh/B3_billboardBush_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B3_billboardBush"},{"mesh":"Mesh/B3_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"B3_bush01"},{"mesh":"Mesh/B3_chainlink_geo.obj","tex":"Texture2D/chainlink_col.png","name":"B3_chainlink"},{"mesh":"Mesh/B3_colourPaletteOutlineSuburbs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B3_colourPaletteOutlineSuburbs"},{"mesh":"Mesh/B3_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B3_colourPaletteOutline"},{"mesh":"Mesh/B3_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B3_colourPalette"},{"mesh":"Mesh/B3_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B3_detailGarbage"},{"mesh":"Mesh/B3_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"B3_detailGravel"},{"mesh":"Mesh/B3_detailRoofing_geo.obj","tex":"Texture2D/detailRoofing_dtl.png","name":"B3_detailRoofing"},{"mesh":"Mesh/B3_detailSand_geo.obj","tex":"Texture2D/detailSand_col.png","name":"B3_detailSand"},{"mesh":"Mesh/B3_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"B3_detailSiding"},{"mesh":"Mesh/B3_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B3_driveway"},{"mesh":"Mesh/B3_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"B3_foliage01"},{"mesh":"Mesh/B3_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"B3_rock01"},{"mesh":"Mesh/B3_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"B3_signs"},{"mesh":"Mesh/B3_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"B3_trashbag"},{"mesh":"Mesh/B3_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"B3_tree01"},{"mesh":"Mesh/B3_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"B3_tree02"},{"mesh":"Mesh/B3_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"B3_tree03"},{"mesh":"Mesh/B3_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B3_window"},{"mesh":"Mesh/B4_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"B4_bark01"},{"mesh":"Mesh/B4_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"B4_bush01"},{"mesh":"Mesh/B4_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B4_colourPaletteOutline"},{"mesh":"Mesh/B4_colourPaletteSuburbsOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B4_colourPaletteSuburbsOutline"},{"mesh":"Mesh/B4_colourPaletteSuburbs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B4_colourPaletteSuburbs"},{"mesh":"Mesh/B4_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B4_colourPalette"},{"mesh":"Mesh/B4_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B4_detailGarbage"},{"mesh":"Mesh/B4_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"B4_detailGravel"},{"mesh":"Mesh/B4_detailRoofing_geo.obj","tex":"Texture2D/detailRoofing_dtl.png","name":"B4_detailRoofing"},{"mesh":"Mesh/B4_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"B4_detailSiding"},{"mesh":"Mesh/B4_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B4_driveway"},{"mesh":"Mesh/B4_fence02_geo.obj","tex":"Texture2D/fence02_col.png","name":"B4_fence02"},{"mesh":"Mesh/B4_fence03_geo.obj","tex":"Texture2D/fence03_col.png","name":"B4_fence03"},{"mesh":"Mesh/B4_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"B4_foliage01"},{"mesh":"Mesh/B4_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"B4_rock01"},{"mesh":"Mesh/B4_screens_geo.obj","tex":"Texture2D/screens_col.png","name":"B4_screens"},{"mesh":"Mesh/B4_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"B4_trashbag"},{"mesh":"Mesh/B4_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"B4_tree01"},{"mesh":"Mesh/B4_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"B4_tree02"},{"mesh":"Mesh/B4_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"B4_tree03"},{"mesh":"Mesh/B4_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B4_vehicles"},{"mesh":"Mesh/B4_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"B4_windowCar"},{"mesh":"Mesh/B4_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"B4_window"},{"mesh":"Mesh/C2_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"C2_bark01"},{"mesh":"Mesh/C2_bush02_geo.obj","tex":"Texture2D/bush02_col.png","name":"C2_bush02"},{"mesh":"Mesh/C2_chainlink_geo.obj","tex":"Texture2D/chainlink_col.png","name":"C2_chainlink"},{"mesh":"Mesh/C2_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C2_colourPaletteOutline"},{"mesh":"Mesh/C2_colourPaletteSuburbsOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C2_colourPaletteSuburbsOutline"},{"mesh":"Mesh/C2_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C2_colourPalette"},{"mesh":"Mesh/C2_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C2_detailGarbage"},{"mesh":"Mesh/C2_detailGrass_geo.obj","tex":"Texture2D/detailGrass_dtl.png","name":"C2_detailGrass"},{"mesh":"Mesh/C2_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"C2_detailGravel"},{"mesh":"Mesh/C2_detailRoofingSuburbs_geo.obj","tex":"Texture2D/detailRoofing_dtl.png","name":"C2_detailRoofing"},{"mesh":"Mesh/C2_detailSand_geo.obj","tex":"Texture2D/detailSand_col.png","name":"C2_detailSand"},{"mesh":"Mesh/C2_detailSidewalk_geo.obj","tex":"Texture2D/detailSidewalk_dtl.png","name":"C2_detailSidewalk"},{"mesh":"Mesh/C2_detailSidingSuburbs_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"C2_detailSiding"},{"mesh":"Mesh/C2_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"C2_detailSiding"},{"mesh":"Mesh/C2_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C2_driveway"},{"mesh":"Mesh/C2_fences_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C2_fences"},{"mesh":"Mesh/C2_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"C2_foliage01"},{"mesh":"Mesh/C2_prius_geo.obj","tex":"Texture2D/prius_col.png","name":"C2_prius"},{"mesh":"Mesh/C2_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"C2_rock01"},{"mesh":"Mesh/C2_screens_geo.obj","tex":"Texture2D/screens_col.png","name":"C2_screens"},{"mesh":"Mesh/C2_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"C2_signs"},{"mesh":"Mesh/C2_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"C2_trashbag"},{"mesh":"Mesh/C2_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"C2_tree01"},{"mesh":"Mesh/C2_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"C2_tree02"},{"mesh":"Mesh/C2_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"C2_tree03"},{"mesh":"Mesh/C2_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C2_vehicles"},{"mesh":"Mesh/C2_waterEdge_geo.obj","tex":"Texture2D/waterEdge_col.png","name":"C2_waterEdge"},{"mesh":"Mesh/C2_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"C2_windowCar"},{"mesh":"Mesh/C2_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C2_window"},{"mesh":"Mesh/C3_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"C3_bark01"},{"mesh":"Mesh/C3_barrierLight_geo.obj","tex":"Texture2D/barrierLight_col.png","name":"C3_barrierLight"},{"mesh":"Mesh/C3_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"C3_bush01"},{"mesh":"Mesh/C3_colourPaletteOutlineSuburbs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_colourPaletteOutlineSuburbs"},{"mesh":"Mesh/C3_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_colourPaletteOutline"},{"mesh":"Mesh/C3_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_colourPalette"},{"mesh":"Mesh/C3_detailBrick_geo.obj","tex":"Texture2D/detailBrick_dtl.png","name":"C3_detailBrick"},{"mesh":"Mesh/C3_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_detailGarbage"},{"mesh":"Mesh/C3_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"C3_detailGravel"},{"mesh":"Mesh/C3_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"C3_detailSiding"},{"mesh":"Mesh/C3_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_driveway"},{"mesh":"Mesh/C3_fences_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_fences"},{"mesh":"Mesh/C3_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"C3_foliage01"},{"mesh":"Mesh/C3_paths_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_paths"},{"mesh":"Mesh/C3_policeSiren_geo.obj","tex":"Texture2D/policeSiren_col.png","name":"C3_policeSiren"},{"mesh":"Mesh/C3_popsicleStand_geo.obj","tex":"Texture2D/popsicleStand_col.png","name":"C3_popsicleStand"},{"mesh":"Mesh/C3_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"C3_rock01"},{"mesh":"Mesh/C3_screens_geo.obj","tex":"Texture2D/screens_col.png","name":"C3_screens"},{"mesh":"Mesh/C3_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"C3_signs"},{"mesh":"Mesh/C3_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"C3_trashbag"},{"mesh":"Mesh/C3_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"C3_tree01"},{"mesh":"Mesh/C3_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"C3_tree02"},{"mesh":"Mesh/C3_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"C3_tree03"},{"mesh":"Mesh/C3_treePine_geo.obj","tex":"Texture2D/treePine_col.png","name":"C3_treePine"},{"mesh":"Mesh/C3_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_vehicles"},{"mesh":"Mesh/C3_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"C3_windowCar"},{"mesh":"Mesh/C3_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C3_window"},{"mesh":"Mesh/C4_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"C4_bark01"},{"mesh":"Mesh/C4_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"C4_bush01"},{"mesh":"Mesh/C4_colourPaletteOutlineSuburbs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C4_colourPaletteOutlineSuburbs"},{"mesh":"Mesh/C4_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C4_colourPaletteOutline"},{"mesh":"Mesh/C4_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C4_colourPalette"},{"mesh":"Mesh/C4_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C4_detailGarbage"},{"mesh":"Mesh/C4_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"C4_detailGravel"},{"mesh":"Mesh/C4_detailRoofing_geo.obj","tex":"Texture2D/detailRoofing_dtl.png","name":"C4_detailRoofing"},{"mesh":"Mesh/C4_detailSand_geo.obj","tex":"Texture2D/detailSand_col.png","name":"C4_detailSand"},{"mesh":"Mesh/C4_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"C4_detailSiding"},{"mesh":"Mesh/C4_dome_geo.obj","tex":"Texture2D/dome_col.png","name":"C4_dome"},{"mesh":"Mesh/C4_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C4_driveway"},{"mesh":"Mesh/C4_fence02_geo.obj","tex":"Texture2D/fence02_col.png","name":"C4_fence02"},{"mesh":"Mesh/C4_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"C4_foliage01"},{"mesh":"Mesh/C4_paths_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C4_paths"},{"mesh":"Mesh/C4_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"C4_rock01"},{"mesh":"Mesh/C4_screens_geo.obj","tex":"Texture2D/screens_col.png","name":"C4_screens"},{"mesh":"Mesh/C4_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"C4_signs"},{"mesh":"Mesh/C4_spiralSlide_geo.obj","tex":"Texture2D/spiralSlide_col.png","name":"C4_spiralSlide"},{"mesh":"Mesh/C4_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"C4_trashbag"},{"mesh":"Mesh/C4_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"C4_tree01"},{"mesh":"Mesh/C4_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"C4_tree02"},{"mesh":"Mesh/C4_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"C4_tree03"},{"mesh":"Mesh/C4_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C4_vehicles"},{"mesh":"Mesh/C4_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"C4_windowCar"},{"mesh":"Mesh/C4_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"C4_window"},{"mesh":"Mesh/D2_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"D2_bark01"},{"mesh":"Mesh/D2_barrierLight_geo.obj","tex":"Texture2D/barrierLight_col.png","name":"D2_barrierLight"},{"mesh":"Mesh/D2_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"D2_bush01"},{"mesh":"Mesh/D2_checker_geo.obj","tex":"Texture2D/checker_col.png","name":"D2_checker"},{"mesh":"Mesh/D2_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D2_colourPaletteOutline"},{"mesh":"Mesh/D2_colourPaletteSuburbsOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D2_colourPaletteSuburbsOutline"},{"mesh":"Mesh/D2_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D2_colourPalette"},{"mesh":"Mesh/D2_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D2_detailGarbage"},{"mesh":"Mesh/D2_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"D2_detailGravel"},{"mesh":"Mesh/D2_detailShingles_geo.obj","tex":"Texture2D/detailShingles_col.png","name":"D2_detailShingles"},{"mesh":"Mesh/D2_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"D2_detailSiding"},{"mesh":"Mesh/D2_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D2_driveway"},{"mesh":"Mesh/D2_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"D2_foliage01"},{"mesh":"Mesh/D2_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"D2_rock01"},{"mesh":"Mesh/D2_screens_geo.obj","tex":"Texture2D/screens_col.png","name":"D2_screens"},{"mesh":"Mesh/D2_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"D2_signs"},{"mesh":"Mesh/D2_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"D2_trashbag"},{"mesh":"Mesh/D2_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"D2_tree01"},{"mesh":"Mesh/D2_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"D2_tree02"},{"mesh":"Mesh/D2_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"D2_tree03"},{"mesh":"Mesh/D2_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D2_vehicles"},{"mesh":"Mesh/D2_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"D2_windowCar"},{"mesh":"Mesh/D2_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D2_window"},{"mesh":"Mesh/D3_GarageDoor_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_GarageDoor"},{"mesh":"Mesh/D3_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"D3_bark01"},{"mesh":"Mesh/D3_barrierLight_geo.obj","tex":"Texture2D/barrierLight_col.png","name":"D3_barrierLight"},{"mesh":"Mesh/D3_brianBirdCarcass_geo.obj","tex":"Texture2D/brianBirdCarcass_col.png","name":"D3_brianBirdCarcass"},{"mesh":"Mesh/D3_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"D3_bush01"},{"mesh":"Mesh/D3_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_colourPaletteOutline"},{"mesh":"Mesh/D3_colourPaletteSuburbs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_colourPaletteSuburbs"},{"mesh":"Mesh/D3_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_colourPalette"},{"mesh":"Mesh/D3_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_detailGarbage"},{"mesh":"Mesh/D3_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"D3_detailGravel"},{"mesh":"Mesh/D3_detailRoofing_geo.obj","tex":"Texture2D/detailRoofing_dtl.png","name":"D3_detailRoofing"},{"mesh":"Mesh/D3_detailRupert_geo.obj","tex":"Texture2D/detailRupert_dtl.png","name":"D3_detailRupert"},{"mesh":"Mesh/D3_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"D3_detailSiding"},{"mesh":"Mesh/D3_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_driveway"},{"mesh":"Mesh/D3_fence03_geo.obj","tex":"Texture2D/fence03_col.png","name":"D3_fence03"},{"mesh":"Mesh/D3_fences_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_fences"},{"mesh":"Mesh/D3_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"D3_foliage01"},{"mesh":"Mesh/D3_lawnChair_geo.obj","tex":"Texture2D/lawnChair_col.png","name":"D3_lawnChair"},{"mesh":"Mesh/D3_mayorStand_colourPaletteSuburbs_geo.obj","tex":"Texture2D/colourPalette_col.png","name":"D3_colourPalette"},{"mesh":"Mesh/D3_mayorStand_flower_geo.obj","tex":"Texture2D/flower_col.png","name":"D3_flower"},{"mesh":"Mesh/D3_mayorStand_mayorWestHere_geo.obj","tex":"Texture2D/mayorWestHere_col.png","name":"D3_mayorWestHere"},{"mesh":"Mesh/D3_mayorStand_podium_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_podium"},{"mesh":"Mesh/D3_mayorStand_townhallOfficeSign_geo.obj","tex":"Texture2D/townhallOfficeSign_col.png","name":"D3_townhallOfficeSign"},{"mesh":"Mesh/D3_paths_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_paths"},{"mesh":"Mesh/D3_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"D3_rock01"},{"mesh":"Mesh/D3_screens_geo.obj","tex":"Texture2D/screens_col.png","name":"D3_screens"},{"mesh":"Mesh/D3_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"D3_signs"},{"mesh":"Mesh/D3_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"D3_trashbag"},{"mesh":"Mesh/D3_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"D3_tree01"},{"mesh":"Mesh/D3_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"D3_tree02"},{"mesh":"Mesh/D3_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"D3_tree03"},{"mesh":"Mesh/D3_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_vehicles"},{"mesh":"Mesh/D3_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"D3_windowCar"},{"mesh":"Mesh/D3_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D3_window"},{"mesh":"Mesh/D4_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"D4_bark01"},{"mesh":"Mesh/D4_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"D4_bush01"},{"mesh":"Mesh/D4_bush02_geo.obj","tex":"Texture2D/bush02_col.png","name":"D4_bush02"},{"mesh":"Mesh/D4_checker_geo.obj","tex":"Texture2D/checker_col.png","name":"D4_checker"},{"mesh":"Mesh/D4_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_colourPaletteOutline"},{"mesh":"Mesh/D4_colourPaletteSuburbs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_colourPaletteSuburbs"},{"mesh":"Mesh/D4_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_colourPalette"},{"mesh":"Mesh/D4_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_detailGarbage"},{"mesh":"Mesh/D4_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"D4_detailGravel"},{"mesh":"Mesh/D4_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"D4_detailSiding"},{"mesh":"Mesh/D4_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_driveway"},{"mesh":"Mesh/D4_fence03_geo.obj","tex":"Texture2D/fence03_col.png","name":"D4_fence03"},{"mesh":"Mesh/D4_fences_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_fences"},{"mesh":"Mesh/D4_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"D4_foliage01"},{"mesh":"Mesh/D4_paths_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_paths"},{"mesh":"Mesh/D4_screens_geo.obj","tex":"Texture2D/screens_col.png","name":"D4_screens"},{"mesh":"Mesh/D4_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"D4_signs"},{"mesh":"Mesh/D4_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"D4_trashbag"},{"mesh":"Mesh/D4_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"D4_tree01"},{"mesh":"Mesh/D4_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"D4_tree02"},{"mesh":"Mesh/D4_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"D4_tree03"},{"mesh":"Mesh/D4_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_vehicles"},{"mesh":"Mesh/D4_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"D4_windowCar"},{"mesh":"Mesh/D4_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"D4_window"},{"mesh":"Mesh/E2_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"E2_bark01"},{"mesh":"Mesh/E2_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"E2_bush01"},{"mesh":"Mesh/E2_bush02_geo.obj","tex":"Texture2D/bush02_col.png","name":"E2_bush02"},{"mesh":"Mesh/E2_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E2_colourPaletteOutline"},{"mesh":"Mesh/E2_colourPaletteSuburbs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E2_colourPaletteSuburbs"},{"mesh":"Mesh/E2_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E2_detailGarbage"},{"mesh":"Mesh/E2_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"E2_detailGravel"},{"mesh":"Mesh/E2_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"E2_detailSiding"},{"mesh":"Mesh/E2_detailWindow_geo.obj","tex":"Texture2D/detailWindow_dtl.png","name":"E2_detailWindow"},{"mesh":"Mesh/E2_dimicoHouse_geo.obj","tex":"Texture2D/dimicoHouse_col.png","name":"E2_dimicoHouse"},{"mesh":"Mesh/E2_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E2_driveway"},{"mesh":"Mesh/E2_fence02_geo.obj","tex":"Texture2D/fence02_col.png","name":"E2_fence02"},{"mesh":"Mesh/E2_fence03_geo.obj","tex":"Texture2D/fence03_col.png","name":"E2_fence03"},{"mesh":"Mesh/E2_fences_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E2_fences"},{"mesh":"Mesh/E2_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"E2_foliage01"},{"mesh":"Mesh/E2_megPillowcaseOfSodaCans_geo.obj","tex":"Texture2D/megPillowcaseOfSodaCans_col.png","name":"E2_megPillowcaseOfSodaCans"},{"mesh":"Mesh/E2_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"E2_rock01"},{"mesh":"Mesh/E2_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"E2_tree01"},{"mesh":"Mesh/E2_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"E2_tree02"},{"mesh":"Mesh/E2_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"E2_tree03"},{"mesh":"Mesh/E2_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E2_window"},{"mesh":"Mesh/E3_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"E3_bark01"},{"mesh":"Mesh/E3_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"E3_bush01"},{"mesh":"Mesh/E3_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E3_colourPaletteOutline"},{"mesh":"Mesh/E3_colourPaletteSuburbs_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E3_colourPaletteSuburbs"},{"mesh":"Mesh/E3_detailBush01_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E3_detailBush01"},{"mesh":"Mesh/E3_detailGarbage_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E3_detailGarbage"},{"mesh":"Mesh/E3_detailGravel_geo.obj","tex":"Texture2D/detailGravel_dtl.png","name":"E3_detailGravel"},{"mesh":"Mesh/E3_detailShingles_geo.obj","tex":"Texture2D/detailShingles_col.png","name":"E3_detailShingles"},{"mesh":"Mesh/E3_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"E3_detailSiding"},{"mesh":"Mesh/E3_driveway_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E3_driveway"},{"mesh":"Mesh/E3_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"E3_foliage01"},{"mesh":"Mesh/E3_paths_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E3_paths"},{"mesh":"Mesh/E3_signs_geo.obj","tex":"Texture2D/signs_col.png","name":"E3_signs"},{"mesh":"Mesh/E3_trashbag_geo.obj","tex":"Texture2D/trashbag_col.png","name":"E3_trashbag"},{"mesh":"Mesh/E3_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"E3_tree01"},{"mesh":"Mesh/E3_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"E3_tree02"},{"mesh":"Mesh/E3_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"E3_tree03"},{"mesh":"Mesh/E3_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E3_vehicles"},{"mesh":"Mesh/E3_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"E3_windowCar"},{"mesh":"Mesh/E3_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E3_window"},{"mesh":"Mesh/E4_bark01_geo.obj","tex":"Texture2D/bark01_col.png","name":"E4_bark01"},{"mesh":"Mesh/E4_bush01_geo.obj","tex":"Texture2D/bush01_col.png","name":"E4_bush01"},{"mesh":"Mesh/E4_colourPaletteOutline_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E4_colourPaletteOutline"},{"mesh":"Mesh/E4_colourPalette_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E4_colourPalette"},{"mesh":"Mesh/E4_detailRoofing_geo.obj","tex":"Texture2D/detailRoofing_dtl.png","name":"E4_detailRoofing"},{"mesh":"Mesh/E4_detailSiding_geo.obj","tex":"Texture2D/detailSiding_dtl.png","name":"E4_detailSiding"},{"mesh":"Mesh/E4_fences_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E4_fences"},{"mesh":"Mesh/E4_foliage01_geo.obj","tex":"Texture2D/foliage01_col.png","name":"E4_foliage01"},{"mesh":"Mesh/E4_rock01_geo.obj","tex":"Texture2D/rock01_col.png","name":"E4_rock01"},{"mesh":"Mesh/E4_tree01_geo.obj","tex":"Texture2D/tree01_col.png","name":"E4_tree01"},{"mesh":"Mesh/E4_tree02_geo.obj","tex":"Texture2D/tree02_col.png","name":"E4_tree02"},{"mesh":"Mesh/E4_tree03_geo.obj","tex":"Texture2D/tree03_col.png","name":"E4_tree03"},{"mesh":"Mesh/E4_vehicles_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E4_vehicles"},{"mesh":"Mesh/E4_windowCar_geo.obj","tex":"Texture2D/windowCar_col.png","name":"E4_windowCar"},{"mesh":"Mesh/E4_window_geo.obj","tex":"Texture2D/colourPaletteSuburbs_col.png","name":"E4_window"}],"ground":["Mesh/B2_collisionGround_cement_geo.obj","Mesh/B2_collisionGround_dirt_geo.obj","Mesh/B2_collisionGround_grass_geo.obj","Mesh/B3_collisionGround_cement_geo.obj","Mesh/B3_collisionGround_dirt_geo.obj","Mesh/B3_collisionGround_grass_geo.obj","Mesh/B4_collisionGround_cement_geo.obj","Mesh/B4_collisionGround_dirt_geo.obj","Mesh/B4_collisionGround_grass_geo.obj","Mesh/C2_collisionGround_cement_geo.obj","Mesh/C2_collisionGround_dirt_geo.obj","Mesh/C2_collisionGround_grass_geo.obj","Mesh/C2_collisionGround_water_geo.obj","Mesh/C3_collisionGround_cement_geo.obj","Mesh/C3_collisionGround_dirt_geo.obj","Mesh/C3_collisionGround_grass_geo.obj","Mesh/C4_collisionGround_cement_geo.obj","Mesh/C4_collisionGround_dirt_geo.obj","Mesh/C4_collisionGround_grass_geo.obj","Mesh/D2_collisionGround_cement_geo.obj","Mesh/D2_collisionGround_dirt_geo.obj","Mesh/D2_collisionGround_grass_geo.obj","Mesh/D3_collisionGround_cement_geo.obj","Mesh/D3_collisionGround_dirt_geo.obj","Mesh/D3_collisionGround_grass_geo.obj","Mesh/D4_collisionGround_cement_geo.obj","Mesh/D4_collisionGround_dirt_geo.obj","Mesh/D4_collisionGround_grass_geo.obj","Mesh/E2_collisionGround_cement_geo.obj","Mesh/E2_collisionGround_dirt_geo.obj","Mesh/E2_collisionGround_grass_geo.obj","Mesh/E3_collisionGround_cement_geo.obj","Mesh/E3_collisionGround_dirt_geo.obj","Mesh/E3_collisionGround_grass_geo.obj","Mesh/E4_collisionGround_grass_geo.obj"],"wall":["Mesh/B2_collisionInvisible_geo.obj","Mesh/B2_collision_geo.obj","Mesh/B3_collisionInvisible_geo.obj","Mesh/B3_collision_geo.obj","Mesh/B4_collisionInvisible_geo.obj","Mesh/B4_collision_geo.obj","Mesh/C2_collisionInvisible_geo.obj","Mesh/C2_collision_geo.obj","Mesh/C3_collisionInvisible_geo.obj","Mesh/C3_collision_geo.obj","Mesh/C4_collisionInvisible_geo.obj","Mesh/C4_collision_geo.obj","Mesh/D2_collisionInvisible_geo.obj","Mesh/D2_collision_geo.obj","Mesh/D3_collisionWater_geo.obj","Mesh/D3_collision_geo.obj","Mesh/D3_mayorStand_collisionInvisible_geo.obj","Mesh/D3_mayorStand_collision_geo.obj","Mesh/D4_collisionInvisible_geo.obj","Mesh/D4_collision_geo.obj","Mesh/E2_collisionInvisible_geo.obj","Mesh/E2_collision_geo.obj","Mesh/E3_collisionInvisible_geo.obj","Mesh/E3_collision_geo.obj","Mesh/E4_collision_geo.obj"]};
+// Clean-room FGO preservation demo: raw WebGL, no dependencies.
+// Loads real extracted zone meshes (OBJ) + textures (PNG) listed in manifest.json.
+const $ = (id) => document.getElementById(id);
+const canvas = $('gl');
+const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+if (!gl) { document.body.innerHTML = '<p style="padding:2em">WebGL not available.</p>'; throw 0; }
+const FILES = new Map();                  // repo-relative path -> File (from the folder the viewer picked)
+const getFile = (p) => { const f = FILES.get(p); if (!f) throw new Error('missing ' + p); return f; };
+const log = (m) => { $('log').innerHTML += `<div>${m}</div>`; };
+// ---------- math ----------
+const m4 = {
+  persp(f, a, n, fa) { const t = 1 / Math.tan(f / 2), r = 1 / (n - fa);
+    return [t / a,0,0,0, 0,t,0,0, 0,0,(n + fa) * r,-1, 0,0,2 * n * fa * r,0]; },
+  look(e, c, u = [0, 1, 0]) {
+    let z = norm(sub(e, c)), x = norm(cross(u, z)), y = cross(z, x);
+    return [x[0],y[0],z[0],0, x[1],y[1],z[1],0, x[2],y[2],z[2],0, -dot(x,e),-dot(y,e),-dot(z,e),1]; },
+  mul(a, b) { const o = new Array(16);
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++)
+      o[j*4+i] = a[i]*b[j*4] + a[4+i]*b[j*4+1] + a[8+i]*b[j*4+2] + a[12+i]*b[j*4+3]; return o; },
+  trs(p, yaw, s) { const c = Math.cos(yaw), si = Math.sin(yaw);
+    return [c*s[0],0,-si*s[0],0, 0,s[1],0,0, si*s[2],0,c*s[2],0, p[0],p[1],p[2],1]; },
+};
+function sub(a, b) { return [a[0]-b[0], a[1]-b[1], a[2]-b[2]]; }
+function dot(a, b) { return a[0]*b[0] + a[1]*b[1] + a[2]*b[2]; }
+function cross(a, b) { return [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]]; }
+function norm(a) { const l = Math.hypot(...a) || 1; return [a[0]/l, a[1]/l, a[2]/l]; }
+// ---------- shaders ----------
+function prog(vs, fs) {
+  const mk = (t, s) => { const h = gl.createShader(t); gl.shaderSource(h, s); gl.compileShader(h);
+    if (!gl.getShaderParameter(h, gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(h); return h; };
+  const p = gl.createProgram(); gl.attachShader(p, mk(gl.VERTEX_SHADER, vs)); gl.attachShader(p, mk(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(p); if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw gl.getProgramInfoLog(p); return p;
+}
+const SKY = [0.62, 0.82, 0.95];
+const worldP = prog(`attribute vec3 p;attribute vec2 uv;attribute vec3 col;uniform mat4 vp;varying vec2 v;varying float d;varying vec3 bc;
+void main(){vec4 c=vp*vec4(p,1.);gl_Position=c;v=uv;d=c.w;bc=col;}`,
+`precision mediump float;uniform sampler2D t;uniform vec3 fog;uniform float mode;varying vec2 v;varying float d;varying vec3 bc;
+void main(){vec4 c=texture2D(t,v);vec3 o;
+ if(mode<.5){if(c.a<.5)discard;o=c.rgb;}            // palette / colour textures
+ else if(mode<1.5){o=mix(bc,c.rgb,c.a);}             // detail overlay on a tinted base
+ else {o=bc;}                                         // flat colour (ground / stand-in walls)
+ float f=clamp((d-90.)/160.,0.,1.);gl_FragColor=vec4(mix(o,fog,f),1.);}`);
+const solidP = prog(`attribute vec3 p;uniform mat4 vp;uniform mat4 m;void main(){gl_Position=vp*m*vec4(p,1.);}`,
+`precision mediump float;uniform vec3 col;void main(){gl_FragColor=vec4(col,1.);}`);
+// ---------- OBJ -> non-indexed pos/uv ----------
+function parseObj(text) {
+  const P = [], T = [], out = [], tris = [];
+  let i = 0; const n = text.length;
+  while (i < n) {
+    let e = text.indexOf('\n', i); if (e < 0) e = n;
+    const c0 = text.charCodeAt(i), c1 = text.charCodeAt(i + 1);
+    if (c0 === 118 && c1 === 32) { const s = text.slice(i + 2, e).trim().split(/\s+/); P.push(+s[0], +s[1], +s[2]); }
+    else if (c0 === 118 && c1 === 116) { const s = text.slice(i + 3, e).trim().split(/\s+/); T.push(+s[0], +s[1]); }
+    else if (c0 === 102 && c1 === 32) {
+      const cs = text.slice(i + 2, e).trim().split(/\s+/).map(x => { const q = x.split('/'); return [(+q[0]) - 1, q[1] ? (+q[1]) - 1 : -1]; });
+      for (let k = 1; k + 1 < cs.length; k++) for (const c of [cs[0], cs[k], cs[k + 1]]) {
+        const a = c[0] < 0 ? P.length / 3 + c[0] + 1 : c[0], b = c[1];
+        if (a < 0 || a * 3 + 2 >= P.length) continue;
+        out.push(P[a*3], P[a*3+1], P[a*3+2], b >= 0 ? T[b*2] : 0, b >= 0 ? T[b*2+1] : 0);
+      }
+    }
+    i = e + 1;
+  }
+  return new Float32Array(out);
+}
+// ---------- spatial grid for collision ----------
+const CELL = 8;
+class TriGrid {
+  constructor() { this.cells = new Map(); this.tris = []; }
+  add(v) { // v: Float32Array stride 5
+    for (let i = 0; i + 14 < v.length; i += 15) {
+      const t = [v[i],v[i+1],v[i+2], v[i+5],v[i+6],v[i+7], v[i+10],v[i+11],v[i+12]];
+      const id = this.tris.push(t) - 1;
+      const x0 = Math.floor(Math.min(t[0],t[3],t[6]) / CELL), x1 = Math.floor(Math.max(t[0],t[3],t[6]) / CELL);
+      const z0 = Math.floor(Math.min(t[2],t[5],t[8]) / CELL), z1 = Math.floor(Math.max(t[2],t[5],t[8]) / CELL);
+      for (let x = x0; x <= x1; x++) for (let z = z0; z <= z1; z++) {
+        const k = x * 100003 + z; let a = this.cells.get(k); if (!a) this.cells.set(k, a = []); a.push(id);
+      }
+    }
+  }
+  near(minx, minz, maxx, maxz) {
+    const s = new Set();
+    for (let x = Math.floor(minx / CELL); x <= Math.floor(maxx / CELL); x++)
+      for (let z = Math.floor(minz / CELL); z <= Math.floor(maxz / CELL); z++)
+        for (const id of this.cells.get(x * 100003 + z) || []) s.add(id);
+    return s;
+  }
+  // Möller–Trumbore; returns nearest t along dir (dir normalised) or Infinity
+  ray(o, d, maxT, ids) {
+    let best = Infinity;
+    for (const id of ids) {
+      const t = this.tris[id];
+      const e1 = [t[3]-t[0], t[4]-t[1], t[5]-t[2]], e2 = [t[6]-t[0], t[7]-t[1], t[8]-t[2]];
+      const h = cross(d, e2), a = dot(e1, h); if (Math.abs(a) < 1e-9) continue;
+      const f = 1 / a, s = [o[0]-t[0], o[1]-t[1], o[2]-t[2]], u = f * dot(s, h); if (u < 0 || u > 1) continue;
+      const q = cross(s, e1), v = f * dot(d, q); if (v < 0 || u + v > 1) continue;
+      const tt = f * dot(e2, q); if (tt > 1e-4 && tt < maxT && tt < best) best = tt;
+    }
+    return best;
+  }
+}
+const ground = new TriGrid(), walls = new TriGrid();
+// ---------- loading ----------
+const drawables = [];
+const PASTELS = [[.95,.85,.45],[.62,.75,.9],[.93,.62,.68],[.7,.85,.6],[.9,.75,.55],[.85,.85,.8],[.75,.7,.9],[.6,.85,.82]];
+const GROUND_COL = { grass: [.42,.74,.32], dirt: [.58,.44,.30], cement: [.70,.70,.72], water: [.35,.62,.88], indoor: [.78,.66,.48], carpet: [.7,.55,.5], wood: [.65,.48,.3] };
+function hashCol(x, z) { const h = (Math.floor(x / 16) * 73856093 ^ Math.floor(z / 16) * 19349663) >>> 0; return PASTELS[h % PASTELS.length]; }
+function baseFor(name, x, z) {
+  if (/Roof|Shingle/i.test(name)) { const c = hashCol(x, z); return [c[0]*.45+.12, c[1]*.35+.12, c[2]*.35+.14]; }
+  if (/Grass/i.test(name)) return GROUND_COL.grass; if (/Brick/i.test(name)) return [.72,.36,.28];
+  if (/Gravel|Sand|Dirt/i.test(name)) return [.66,.6,.52]; if (/Sidewalk|Tile|Checkered/i.test(name)) return [.84,.84,.82];
+  if (/Carpet/i.test(name)) return [.72,.52,.48]; if (/Wood/i.test(name)) return [.66,.48,.3];
+  return hashCol(x, z);   // siding etc: per-house pastel (original used vertex colours not present in the OBJ export)
+}
+function packVerts(v, mode, nameOrCol) {
+  const n = v.length / 5, o = new Float32Array(n * 8);
+  for (let i = 0; i < n; i++) {
+    o.set(v.subarray(i * 5, i * 5 + 5), i * 8);
+    const c = mode === 2 ? nameOrCol : mode === 3 ? hashCol(v[i*5], v[i*5+2]) : mode === 1 ? baseFor(nameOrCol, v[i*5], v[i*5+2]) : [1,1,1];
+    o[i*8+5] = c[0]; o[i*8+6] = c[1]; o[i*8+7] = c[2];
+    if (mode === 2) o[i*8+1] -= 0.02;
+  }
+  return o;
+}
+function addDrawable(v, mode, tex, label, colOrName) {
+  const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, packVerts(v, mode, colOrName), gl.STATIC_DRAW);
+  drawables.push({ b, n: v.length / 5, t: tex, mode, name: label });
+}
+const texCache = new Map();
+function loadTex(url) {
+  if (!url) url = null;
+  if (texCache.has(url)) return texCache.get(url);
+  const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([200, 200, 200, 255]));
+  texCache.set(url, t);
+  if (url) { const im = new Image(); im.onload = () => {
+    gl.bindTexture(gl.TEXTURE_2D, t); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
+    const pot = (n) => (n & (n - 1)) === 0;
+    if (pot(im.width) && pot(im.height)) { gl.generateMipmap(gl.TEXTURE_2D);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT); }
+    else { gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); }
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+  }; const f = FILES.get(url); if (f) im.src = URL.createObjectURL(f); }
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  return t;
+}
+const fetchObj = async (p) => parseObj(await getFile(p).text());
+const ground_bounds = { minx: 1e9, maxx: -1e9, minz: 1e9, maxz: -1e9 }, groundPts = [];
+async function load() {
+  const man = MANIFEST;
+  const jobs = [...man.ground.map(p => ({ k: 'g', p })), ...man.wall.map(p => ({ k: 'w', p })), ...man.render.map(r => ({ k: 'r', p: r.mesh, r }))];
+  let done = 0, next = 0;
+  const worker = async () => { while (next < jobs.length) { const j = jobs[next++];
+    try { const v = await fetchObj(j.p);
+      if (j.k === 'g') { ground.add(v); const kind = Object.keys(GROUND_COL).find(k => j.p.includes('collisionGround_' + k)) || 'cement';
+        addDrawable(v, 2, loadTex(null), j.p, GROUND_COL[kind]); for (let i = 0; i < v.length; i += 15) { const x = v[i], z = v[i+2];
+        ground_bounds.minx = Math.min(ground_bounds.minx, x); ground_bounds.maxx = Math.max(ground_bounds.maxx, x);
+        ground_bounds.minz = Math.min(ground_bounds.minz, z); ground_bounds.maxz = Math.max(ground_bounds.maxz, z); groundPts.push(x, z); } }
+      else if (j.k === 'w') { walls.add(v);
+        if (/collision_geo|collisionProp/.test(j.p) && !location.search.includes('nowalls')) addDrawable(v, 3, loadTex(null), j.p, j.p); }
+      else if (v.length) { const dtl = (j.r.tex || '').includes('_dtl'); addDrawable(v, dtl ? 1 : 0, loadTex(j.r.tex), j.r.name, j.r.name); }
+    } catch (e) { console.warn('skip', j.p, e); }
+    $('lp').style.width = (++done / jobs.length * 100) + '%'; $('lt').textContent = `${done}/${jobs.length} meshes`; } };
+  await Promise.all(Array.from({ length: 6 }, worker));
+}
+// ---------- player + camera ----------
+const player = { p: [0, 0, 0], yaw: 0, vy: 0, onGround: false, walk: 0 };
+const cam = { yaw: Math.PI, pitch: 0.35, dist: 7 };
+const keys = {};
+addEventListener('keydown', (e) => { keys[e.code] = true; if (e.code === 'Space') e.preventDefault(); });
+addEventListener('keyup', (e) => { keys[e.code] = false; });
+let drag = false;
+canvas.addEventListener('pointerdown', (e) => { drag = true; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener('pointerup', () => { drag = false; });
+canvas.addEventListener('pointermove', (e) => { if (!drag) return; cam.yaw -= e.movementX * 0.006; cam.pitch = Math.max(0.05, Math.min(1.3, cam.pitch + e.movementY * 0.004)); });
+canvas.addEventListener('wheel', (e) => { cam.dist = Math.max(3, Math.min(18, cam.dist + e.deltaY * 0.01)); e.preventDefault(); }, { passive: false });
+function groundAt(x, y, z, up = 0.8, down = 4) {
+  const ids = ground.near(x - 0.01, z - 0.01, x + 0.01, z + 0.01);
+  const t = ground.ray([x, y + up, z], [0, -1, 0], up + down, ids);
+  return t === Infinity ? null : y + up - t;
+}
+function wallHit(x, y, z, dx, dz, len) {
+  const d = norm([dx, 0, dz]); const ids = walls.near(Math.min(x, x + dx * len) - 0.5, Math.min(z, z + dz * len) - 0.5, Math.max(x, x + dx * len) + 0.5, Math.max(z, z + dz * len) + 0.5);
+  return Math.min(walls.ray([x, y + 0.5, z], d, len, ids), walls.ray([x, y + 1.0, z], d, len, ids)) < len;
+}
+const R = 0.35;
+function step(dt) {
+  if (keys.KeyQ) cam.yaw += 1.8 * dt; if (keys.KeyE) cam.yaw -= 1.8 * dt;
+  let ix = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
+  let iz = (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0);
+  const speed = (keys.ShiftLeft || keys.ShiftRight ? 9 : 5.2);
+  if (ix || iz) {
+    const l = Math.hypot(ix, iz); ix /= l; iz /= l;
+    const fx = -Math.sin(cam.yaw), fz = -Math.cos(cam.yaw), rx = Math.cos(cam.yaw), rz = -Math.sin(cam.yaw);
+    const dx = (fx * iz + rx * ix) * speed * dt, dz = (fz * iz + rz * ix) * speed * dt;
+    const len = Math.hypot(dx, dz), [x, y, z] = player.p;
+    const tryMove = (mx, mz) => { const L = Math.hypot(mx, mz); if (L < 1e-6) return false;
+      if (wallHit(x, y, z, mx, mz, L + R)) return false;
+      const g = groundAt(x + mx, y, z + mz, 0.6, 1.5); if (g === null) return false;
+      player.p[0] += mx; player.p[2] += mz; return true; };
+    if (!tryMove(dx, dz) && !tryMove(dx, 0)) tryMove(0, dz);
+    const target = Math.atan2(dx, dz); let d = target - player.yaw; d = Math.atan2(Math.sin(d), Math.cos(d));
+    player.yaw += d * Math.min(1, dt * 14); player.walk += dt * speed * 1.6;
+  } else player.walk = 0;
+  const g = groundAt(player.p[0], player.p[1], player.p[2], 0.6, 6);
+  if (keys.Space && player.onGround) { player.vy = 6.5; player.onGround = false; }
+  player.vy -= 18 * dt; player.p[1] += player.vy * dt;
+  if (g !== null && player.p[1] <= g) { player.p[1] = g; player.vy = 0; player.onGround = true; } else if (g === null || player.p[1] > g + 0.05) player.onGround = false;
+}
+// ---------- chibi player (placeholder primitives, original design) ----------
+const cube = (() => { const v = []; const f = [[0,0,1],[0,0,-1],[1,0,0],[-1,0,0],[0,1,0],[0,-1,0]];
+  for (const n of f) { const u = Math.abs(n[1]) ? [1,0,0] : [0,1,0], w = cross(n, u);
+    const q = [[-1,-1],[1,-1],[1,1],[-1,1]].map(([a,b]) => [n[0]+u[0]*a+w[0]*b, n[1]+u[1]*a+w[1]*b, n[2]+u[2]*a+w[2]*b].map(x => x * 0.5));
+    for (const i of [0,1,2,0,2,3]) v.push(...q[i]); } return new Float32Array(v); })();
+const cubeBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, cubeBuf); gl.bufferData(gl.ARRAY_BUFFER, cube, gl.STATIC_DRAW);
+const PARTS = [ // [offset, scale, colour]  (y up from feet)
+  [[0, 0.30, 0], [0.30, 0.55, 0.22], [0.2, 0.3, 0.55]],       // legs
+  [[0, 0.78, 0], [0.42, 0.45, 0.26], [0.12, 0.12, 0.14]],      // torso
+  [[0, 1.30, 0], [0.80, 0.70, 0.70], [0.93, 0.76, 0.58]],     // head
+  [[0, 1.68, 0], [0.62, 0.14, 0.62], [0.35, 0.28, 0.20]],      // hat crown
+  [[0, 1.60, 0], [1.00, 0.05, 1.00], [0.30, 0.24, 0.17]],     // brim
+  [[-0.16, 1.33, 0.36], [0.17, 0.17, 0.04], [1, 1, 1]], [[0.16, 1.33, 0.36], [0.17, 0.17, 0.04], [1, 1, 1]],
+  [[-0.16, 1.33, 0.385], [0.07, 0.07, 0.03], [0.05, 0.05, 0.05]], [[0.16, 1.33, 0.385], [0.07, 0.07, 0.03], [0.05, 0.05, 0.05]],
+];
+function drawPlayer(vp) {
+  gl.useProgram(solidP); gl.bindBuffer(gl.ARRAY_BUFFER, cubeBuf);
+  const loc = gl.getAttribLocation(solidP, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 3, gl.FLOAT, false, 12, 0);
+  gl.uniformMatrix4fv(gl.getUniformLocation(solidP, 'vp'), false, vp);
+  const bob = Math.abs(Math.sin(player.walk)) * 0.06, sw = Math.sin(player.walk) * 0.0;
+  for (const [o, s, c] of PARTS) {
+    const cy = Math.cos(player.yaw), sy = Math.sin(player.yaw);
+    const wp = [player.p[0] + o[0]*cy + o[2]*sy, player.p[1] + o[1] + bob, player.p[2] - o[0]*sy + o[2]*cy];
+    gl.uniformMatrix4fv(gl.getUniformLocation(solidP, 'm'), false, m4.trs(wp, player.yaw, s));
+    gl.uniform3fv(gl.getUniformLocation(solidP, 'col'), c); gl.drawArrays(gl.TRIANGLES, 0, 36);
+  }
+}
+// ---------- minimap ----------
+const mm = $('mm'), mc = mm.getContext('2d'); let mmBase = null;
+function buildMini() {
+  const b = ground_bounds, W = mm.width, H = mm.height; mmBase = document.createElement('canvas'); mmBase.width = W; mmBase.height = H;
+  const c = mmBase.getContext('2d'); c.fillStyle = '#2f6b3a'; c.fillRect(0, 0, W, H); c.fillStyle = '#9fd68a';
+  const sx = W / (b.maxx - b.minx), sz = H / (b.maxz - b.minz);
+  for (let i = 0; i < groundPts.length; i += 2) c.fillRect((groundPts[i] - b.minx) * sx, (groundPts[i+1] - b.minz) * sz, 2, 2);
+}
+function drawMini() {
+  if (!mmBase) return; const b = ground_bounds; mc.drawImage(mmBase, 0, 0);
+  mc.fillStyle = '#fff'; mc.strokeStyle = '#e33'; mc.lineWidth = 2; mc.beginPath();
+  mc.arc((player.p[0] - b.minx) / (b.maxx - b.minx) * mm.width, (player.p[2] - b.minz) / (b.maxz - b.minz) * mm.height, 4, 0, 7); mc.fill(); mc.stroke();
+}
+// ---------- main loop ----------
+function resize() { const r = devicePixelRatio || 1; canvas.width = innerWidth * r; canvas.height = innerHeight * r; gl.viewport(0, 0, canvas.width, canvas.height); }
+addEventListener('resize', resize); resize();
+let last = performance.now();
+const wl = { p: gl.getAttribLocation(worldP, 'p'), uv: gl.getAttribLocation(worldP, 'uv'), col: gl.getAttribLocation(worldP, 'col') }; const modeLoc = gl.getUniformLocation(worldP, 'mode');
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now; step(dt);
+  gl.clearColor(...(location.search.includes("bg") ? [1,0,1] : SKY), 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); gl.enable(gl.DEPTH_TEST);
+  const tgt = [player.p[0], player.p[1] + 1.2, player.p[2]];
+  const cp = Math.cos(cam.pitch), eye = [tgt[0] + Math.sin(cam.yaw) * cp * cam.dist, tgt[1] + Math.sin(cam.pitch) * cam.dist, tgt[2] + Math.cos(cam.yaw) * cp * cam.dist];
+  const vp = m4.mul(m4.persp(0.9, canvas.width / canvas.height, 0.2, 600), m4.look(eye, tgt));
+  gl.useProgram(worldP); gl.uniformMatrix4fv(gl.getUniformLocation(worldP, 'vp'), false, vp); gl.uniform3fv(gl.getUniformLocation(worldP, 'fog'), SKY);
+  gl.uniform1i(gl.getUniformLocation(worldP, 't'), 0);  gl.enableVertexAttribArray(wl.p); gl.enableVertexAttribArray(wl.uv); gl.enableVertexAttribArray(wl.col);
+  const ONLY = new URLSearchParams(location.search).get('only');
+  for (const d of drawables) { if (ONLY && (ONLY[0] === '=' ? d.name !== ONLY.slice(1) : !d.name.includes(ONLY))) continue; gl.bindBuffer(gl.ARRAY_BUFFER, d.b); gl.vertexAttribPointer(wl.p, 3, gl.FLOAT, false, 32, 0); gl.vertexAttribPointer(wl.uv, 2, gl.FLOAT, false, 32, 12); gl.vertexAttribPointer(wl.col, 3, gl.FLOAT, false, 32, 20); gl.uniform1f(modeLoc, d.mode === 3 ? 2 : d.mode);
+    gl.bindTexture(gl.TEXTURE_2D, d.t); gl.drawArrays(gl.TRIANGLES, 0, d.n); }
+  gl.disableVertexAttribArray(wl.uv); gl.disableVertexAttribArray(wl.col); drawPlayer(vp); drawMini(); requestAnimationFrame(frame);
+}
+// start screen: pick the repo folder (files are read locally, nothing is uploaded)
+$('pick').addEventListener('change', (e) => {
+  for (const f of e.target.files) { const p = f.webkitRelativePath.split('/').slice(1).join('/'); FILES.set(p, f); }
+  const need = MANIFEST.render[0].mesh;
+  if (!FILES.has(need)) { $('err').textContent = 'That folder does not contain Mesh/, Texture2D/ and the rest of the dump. Pick the repository root.'; return; }
+  $('start').hidden = true; $('hud').hidden = false; $('gl').hidden = false; document.body.classList.add('play'); resize(); $('load').hidden = false; boot();
+});
+// hotbar
+for (let i = 1; i <= 8; i++) { const s = document.createElement('div'); s.className = 'slot' + (i === 1 ? ' on' : ''); s.textContent = i; $('bar').appendChild(s); }
+
+function boot() { load().then(() => {
+  // spawn on the ground nearest the centroid of loaded ground
+  let sx = 0, sz = 0, n = groundPts.length / 2; for (let i = 0; i < groundPts.length; i += 2) { sx += groundPts[i]; sz += groundPts[i+1]; }
+  sx /= n; sz /= n; let best = null, bd = 1e18;
+  for (let i = 0; i < groundPts.length; i += 2) { const d = (groundPts[i]-sx)**2 + (groundPts[i+1]-sz)**2; if (d < bd) { bd = d; best = [groundPts[i], groundPts[i+1]]; } }
+  const qs = new URLSearchParams(location.search); if (qs.has('x')) best = [+qs.get('x'), +qs.get('z')];
+  const g = groundAt(best[0], 5, best[1], 10, 20) ?? 0; player.p = [best[0], g, best[1]];
+  buildMini(); $('load').hidden = true; log('Welcome to Spooner Street.'); log(`${drawables.length} meshes loaded.`); requestAnimationFrame(frame);
+}).catch(e => { $('lt').textContent = 'Error: ' + e; console.error(e); }); }
+window.__fgo = { player, cam, keys };
+
+</script>
