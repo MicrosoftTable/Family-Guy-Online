@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>FGO Preservation Demo</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--ui:#25435f;--ui2:#3b6a93;--gold:#f3b21b}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#9fd2f2;font:600 12px/1.3 system-ui,sans-serif;color:#fff}
+canvas#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+.panel{position:fixed;background:rgba(32,62,92,.88);border:1px solid #6d9bc4;border-radius:6px}
+#cash{left:10px;top:8px;display:flex;gap:8px}
+.pill{background:#f4f4f0;color:#333;border-radius:14px;padding:3px 12px 3px 10px;font-size:14px;font-weight:800;border:2px solid #fff;box-shadow:0 1px 2px #0006}
+.pill b{color:#2e8b3a}.pill.g b{color:#c88a00}
+#mini{right:10px;top:10px;width:150px}#mini canvas{display:block;width:100%;height:110px;border-radius:6px 6px 0 0}
+#street{text-align:center;padding:4px 0;letter-spacing:.5px}
+#quest{right:10px;top:170px;width:190px;padding:8px}#quest h4{margin:0 0 6px;font-size:12px}
+#quest li{list-style:none;margin:0 0 5px;padding-left:18px;position:relative;font-weight:500}
+#quest li:before{content:"";position:absolute;left:0;top:1px;width:11px;height:11px;background:#fff;border-radius:2px}
+#quest li.d:before{background:#7ad36a}
+#quest ul{margin:0;padding:0}
+#chat{left:10px;bottom:90px;width:300px;height:130px;padding:6px;font-weight:500;overflow:hidden}
+#chat .tab{display:inline-block;background:#f0a020;color:#fff;border-radius:6px 6px 0 0;padding:1px 8px;margin:-6px 0 4px -6px;font-size:10px}
+#portrait{left:6px;bottom:6px;display:flex;align-items:center;gap:6px;border:0;background:none}
+#portrait .face{width:62px;height:62px;border-radius:50%;background:#f3c7a0;border:4px solid #26527a;display:grid;place-items:center;font-size:30px}
+#portrait .hp{background:#d33;border-radius:12px;padding:2px 8px;font-weight:800}
+#bar{left:50%;transform:translateX(-50%);bottom:8px;display:flex;gap:4px;padding:6px;align-items:center}
+.slot{width:46px;height:46px;border:2px solid #20405c;border-radius:6px;background:#3a6788;display:grid;place-items:center;color:#a9c7e0;font-size:10px}
+.slot.on{background:#8ac26b;color:#fff}
+#menu{right:10px;bottom:8px;background:#46a6e0;border-radius:14px 14px 0 0;padding:8px 18px;font-weight:800}
+#hint{left:50%;top:10px;transform:translateX(-50%);padding:6px 12px;text-align:center}
+#load{position:fixed;inset:0;display:grid;place-items:center;background:#15324a;z-index:9;text-align:center}
+#load div{max-width:420px}#bar2{height:8px;background:#0006;border-radius:4px;margin-top:10px;overflow:hidden}#bar2 i{display:block;height:100%;width:0;background:var(--gold)}
+</style></head><body>
+<canvas id="gl"></canvas>
+<div id="load"><div><h2 style="margin:0 0 6px">Loading Spooner Street…</h2><div id="lt">fetching manifest</div><div id="bar2"><i id="lp"></i></div></div></div>
+<div class="panel pill-wrap" id="cash" style="background:none;border:0"><div class="pill"><b>$</b> 0</div><div class="pill g"><b>●</b> 175</div></div>
+<div class="panel" id="mini"><canvas id="mm" width="150" height="110"></canvas><div id="street">SPOONER STREET</div></div>
+<div class="panel" id="quest"><h4>INDOOR HOT AIR BALLOON</h4><ul>
+<li class="d">Get some Scrap Nylon outside the Little Clam Preschool</li>
+<li class="d">Get a Propane Tank outside the Abandoned House</li>
+<li>Get a Flint Spark Lighter from the BBQ</li></ul></div>
+<div class="panel" id="chat"><span class="tab">GENERAL</span><div id="log"></div></div>
+<div class="panel" id="portrait"><div class="face">🎩</div><div class="hp">♥ 100%</div></div>
+<div class="panel" id="bar"></div>
+<div class="panel" id="menu">MAIN MENU</div>
+<div class="panel" id="hint">WASD move · Shift run · drag mouse / Q,E rotate camera · wheel zoom · Space jump</div>
+<script type="module" src="game.js"></script>
+</body></html>

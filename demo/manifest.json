@@ -1,0 +1,1448 @@
+{
+"render": [
+{
+"mesh": "Mesh/B2_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "B2_bark01"
+},
+{
+"mesh": "Mesh/B2_chainlink_geo.obj",
+"tex": "Texture2D/chainlink_col.png",
+"name": "B2_chainlink"
+},
+{
+"mesh": "Mesh/B2_colourPaletteSubrubs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B2_colourPaletteSubrubs"
+},
+{
+"mesh": "Mesh/B2_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B2_colourPalette"
+},
+{
+"mesh": "Mesh/B2_delorian_geo.obj",
+"tex": "Texture2D/delorean_col.png",
+"name": "B2_delorian"
+},
+{
+"mesh": "Mesh/B2_detailRoofing_geo.obj",
+"tex": "Texture2D/detailRoofing_dtl.png",
+"name": "B2_detailRoofing"
+},
+{
+"mesh": "Mesh/B2_dirtBike_geo.obj",
+"tex": "Texture2D/peterDirtBike_col.png",
+"name": "B2_dirtBike"
+},
+{
+"mesh": "Mesh/B2_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "B2_foliage01"
+},
+{
+"mesh": "Mesh/B2_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "B2_rock01"
+},
+{
+"mesh": "Mesh/B2_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "B2_signs"
+},
+{
+"mesh": "Mesh/B2_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "B2_tree01"
+},
+{
+"mesh": "Mesh/B2_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "B2_tree03"
+},
+{
+"mesh": "Mesh/B3__rock01_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B3__rock01"
+},
+{
+"mesh": "Mesh/B3_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "B3_bark01"
+},
+{
+"mesh": "Mesh/B3_billboardBush_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B3_billboardBush"
+},
+{
+"mesh": "Mesh/B3_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "B3_bush01"
+},
+{
+"mesh": "Mesh/B3_chainlink_geo.obj",
+"tex": "Texture2D/chainlink_col.png",
+"name": "B3_chainlink"
+},
+{
+"mesh": "Mesh/B3_colourPaletteOutlineSuburbs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B3_colourPaletteOutlineSuburbs"
+},
+{
+"mesh": "Mesh/B3_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B3_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/B3_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B3_colourPalette"
+},
+{
+"mesh": "Mesh/B3_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B3_detailGarbage"
+},
+{
+"mesh": "Mesh/B3_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "B3_detailGravel"
+},
+{
+"mesh": "Mesh/B3_detailRoofing_geo.obj",
+"tex": "Texture2D/detailRoofing_dtl.png",
+"name": "B3_detailRoofing"
+},
+{
+"mesh": "Mesh/B3_detailSand_geo.obj",
+"tex": "Texture2D/detailSand_col.png",
+"name": "B3_detailSand"
+},
+{
+"mesh": "Mesh/B3_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "B3_detailSiding"
+},
+{
+"mesh": "Mesh/B3_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B3_driveway"
+},
+{
+"mesh": "Mesh/B3_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "B3_foliage01"
+},
+{
+"mesh": "Mesh/B3_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "B3_rock01"
+},
+{
+"mesh": "Mesh/B3_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "B3_signs"
+},
+{
+"mesh": "Mesh/B3_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "B3_trashbag"
+},
+{
+"mesh": "Mesh/B3_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "B3_tree01"
+},
+{
+"mesh": "Mesh/B3_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "B3_tree02"
+},
+{
+"mesh": "Mesh/B3_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "B3_tree03"
+},
+{
+"mesh": "Mesh/B3_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B3_window"
+},
+{
+"mesh": "Mesh/B4_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "B4_bark01"
+},
+{
+"mesh": "Mesh/B4_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "B4_bush01"
+},
+{
+"mesh": "Mesh/B4_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B4_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/B4_colourPaletteSuburbsOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B4_colourPaletteSuburbsOutline"
+},
+{
+"mesh": "Mesh/B4_colourPaletteSuburbs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B4_colourPaletteSuburbs"
+},
+{
+"mesh": "Mesh/B4_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B4_colourPalette"
+},
+{
+"mesh": "Mesh/B4_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B4_detailGarbage"
+},
+{
+"mesh": "Mesh/B4_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "B4_detailGravel"
+},
+{
+"mesh": "Mesh/B4_detailRoofing_geo.obj",
+"tex": "Texture2D/detailRoofing_dtl.png",
+"name": "B4_detailRoofing"
+},
+{
+"mesh": "Mesh/B4_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "B4_detailSiding"
+},
+{
+"mesh": "Mesh/B4_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B4_driveway"
+},
+{
+"mesh": "Mesh/B4_fence02_geo.obj",
+"tex": "Texture2D/fence02_col.png",
+"name": "B4_fence02"
+},
+{
+"mesh": "Mesh/B4_fence03_geo.obj",
+"tex": "Texture2D/fence03_col.png",
+"name": "B4_fence03"
+},
+{
+"mesh": "Mesh/B4_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "B4_foliage01"
+},
+{
+"mesh": "Mesh/B4_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "B4_rock01"
+},
+{
+"mesh": "Mesh/B4_screens_geo.obj",
+"tex": "Texture2D/screens_col.png",
+"name": "B4_screens"
+},
+{
+"mesh": "Mesh/B4_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "B4_trashbag"
+},
+{
+"mesh": "Mesh/B4_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "B4_tree01"
+},
+{
+"mesh": "Mesh/B4_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "B4_tree02"
+},
+{
+"mesh": "Mesh/B4_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "B4_tree03"
+},
+{
+"mesh": "Mesh/B4_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B4_vehicles"
+},
+{
+"mesh": "Mesh/B4_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "B4_windowCar"
+},
+{
+"mesh": "Mesh/B4_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "B4_window"
+},
+{
+"mesh": "Mesh/C2_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "C2_bark01"
+},
+{
+"mesh": "Mesh/C2_bush02_geo.obj",
+"tex": "Texture2D/bush02_col.png",
+"name": "C2_bush02"
+},
+{
+"mesh": "Mesh/C2_chainlink_geo.obj",
+"tex": "Texture2D/chainlink_col.png",
+"name": "C2_chainlink"
+},
+{
+"mesh": "Mesh/C2_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C2_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/C2_colourPaletteSuburbsOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C2_colourPaletteSuburbsOutline"
+},
+{
+"mesh": "Mesh/C2_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C2_colourPalette"
+},
+{
+"mesh": "Mesh/C2_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C2_detailGarbage"
+},
+{
+"mesh": "Mesh/C2_detailGrass_geo.obj",
+"tex": "Texture2D/detailGrass_dtl.png",
+"name": "C2_detailGrass"
+},
+{
+"mesh": "Mesh/C2_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "C2_detailGravel"
+},
+{
+"mesh": "Mesh/C2_detailRoofingSuburbs_geo.obj",
+"tex": "Texture2D/detailRoofing_dtl.png",
+"name": "C2_detailRoofing"
+},
+{
+"mesh": "Mesh/C2_detailSand_geo.obj",
+"tex": "Texture2D/detailSand_col.png",
+"name": "C2_detailSand"
+},
+{
+"mesh": "Mesh/C2_detailSidewalk_geo.obj",
+"tex": "Texture2D/detailSidewalk_dtl.png",
+"name": "C2_detailSidewalk"
+},
+{
+"mesh": "Mesh/C2_detailSidingSuburbs_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "C2_detailSiding"
+},
+{
+"mesh": "Mesh/C2_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "C2_detailSiding"
+},
+{
+"mesh": "Mesh/C2_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C2_driveway"
+},
+{
+"mesh": "Mesh/C2_fences_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C2_fences"
+},
+{
+"mesh": "Mesh/C2_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "C2_foliage01"
+},
+{
+"mesh": "Mesh/C2_prius_geo.obj",
+"tex": "Texture2D/prius_col.png",
+"name": "C2_prius"
+},
+{
+"mesh": "Mesh/C2_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "C2_rock01"
+},
+{
+"mesh": "Mesh/C2_screens_geo.obj",
+"tex": "Texture2D/screens_col.png",
+"name": "C2_screens"
+},
+{
+"mesh": "Mesh/C2_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "C2_signs"
+},
+{
+"mesh": "Mesh/C2_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "C2_trashbag"
+},
+{
+"mesh": "Mesh/C2_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "C2_tree01"
+},
+{
+"mesh": "Mesh/C2_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "C2_tree02"
+},
+{
+"mesh": "Mesh/C2_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "C2_tree03"
+},
+{
+"mesh": "Mesh/C2_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C2_vehicles"
+},
+{
+"mesh": "Mesh/C2_waterEdge_geo.obj",
+"tex": "Texture2D/waterEdge_col.png",
+"name": "C2_waterEdge"
+},
+{
+"mesh": "Mesh/C2_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "C2_windowCar"
+},
+{
+"mesh": "Mesh/C2_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C2_window"
+},
+{
+"mesh": "Mesh/C3_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "C3_bark01"
+},
+{
+"mesh": "Mesh/C3_barrierLight_geo.obj",
+"tex": "Texture2D/barrierLight_col.png",
+"name": "C3_barrierLight"
+},
+{
+"mesh": "Mesh/C3_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "C3_bush01"
+},
+{
+"mesh": "Mesh/C3_colourPaletteOutlineSuburbs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_colourPaletteOutlineSuburbs"
+},
+{
+"mesh": "Mesh/C3_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/C3_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_colourPalette"
+},
+{
+"mesh": "Mesh/C3_detailBrick_geo.obj",
+"tex": "Texture2D/detailBrick_dtl.png",
+"name": "C3_detailBrick"
+},
+{
+"mesh": "Mesh/C3_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_detailGarbage"
+},
+{
+"mesh": "Mesh/C3_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "C3_detailGravel"
+},
+{
+"mesh": "Mesh/C3_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "C3_detailSiding"
+},
+{
+"mesh": "Mesh/C3_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_driveway"
+},
+{
+"mesh": "Mesh/C3_fences_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_fences"
+},
+{
+"mesh": "Mesh/C3_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "C3_foliage01"
+},
+{
+"mesh": "Mesh/C3_paths_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_paths"
+},
+{
+"mesh": "Mesh/C3_policeSiren_geo.obj",
+"tex": "Texture2D/policeSiren_col.png",
+"name": "C3_policeSiren"
+},
+{
+"mesh": "Mesh/C3_popsicleStand_geo.obj",
+"tex": "Texture2D/popsicleStand_col.png",
+"name": "C3_popsicleStand"
+},
+{
+"mesh": "Mesh/C3_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "C3_rock01"
+},
+{
+"mesh": "Mesh/C3_screens_geo.obj",
+"tex": "Texture2D/screens_col.png",
+"name": "C3_screens"
+},
+{
+"mesh": "Mesh/C3_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "C3_signs"
+},
+{
+"mesh": "Mesh/C3_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "C3_trashbag"
+},
+{
+"mesh": "Mesh/C3_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "C3_tree01"
+},
+{
+"mesh": "Mesh/C3_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "C3_tree02"
+},
+{
+"mesh": "Mesh/C3_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "C3_tree03"
+},
+{
+"mesh": "Mesh/C3_treePine_geo.obj",
+"tex": "Texture2D/treePine_col.png",
+"name": "C3_treePine"
+},
+{
+"mesh": "Mesh/C3_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_vehicles"
+},
+{
+"mesh": "Mesh/C3_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "C3_windowCar"
+},
+{
+"mesh": "Mesh/C3_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C3_window"
+},
+{
+"mesh": "Mesh/C4_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "C4_bark01"
+},
+{
+"mesh": "Mesh/C4_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "C4_bush01"
+},
+{
+"mesh": "Mesh/C4_colourPaletteOutlineSuburbs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C4_colourPaletteOutlineSuburbs"
+},
+{
+"mesh": "Mesh/C4_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C4_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/C4_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C4_colourPalette"
+},
+{
+"mesh": "Mesh/C4_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C4_detailGarbage"
+},
+{
+"mesh": "Mesh/C4_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "C4_detailGravel"
+},
+{
+"mesh": "Mesh/C4_detailRoofing_geo.obj",
+"tex": "Texture2D/detailRoofing_dtl.png",
+"name": "C4_detailRoofing"
+},
+{
+"mesh": "Mesh/C4_detailSand_geo.obj",
+"tex": "Texture2D/detailSand_col.png",
+"name": "C4_detailSand"
+},
+{
+"mesh": "Mesh/C4_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "C4_detailSiding"
+},
+{
+"mesh": "Mesh/C4_dome_geo.obj",
+"tex": "Texture2D/dome_col.png",
+"name": "C4_dome"
+},
+{
+"mesh": "Mesh/C4_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C4_driveway"
+},
+{
+"mesh": "Mesh/C4_fence02_geo.obj",
+"tex": "Texture2D/fence02_col.png",
+"name": "C4_fence02"
+},
+{
+"mesh": "Mesh/C4_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "C4_foliage01"
+},
+{
+"mesh": "Mesh/C4_paths_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C4_paths"
+},
+{
+"mesh": "Mesh/C4_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "C4_rock01"
+},
+{
+"mesh": "Mesh/C4_screens_geo.obj",
+"tex": "Texture2D/screens_col.png",
+"name": "C4_screens"
+},
+{
+"mesh": "Mesh/C4_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "C4_signs"
+},
+{
+"mesh": "Mesh/C4_spiralSlide_geo.obj",
+"tex": "Texture2D/spiralSlide_col.png",
+"name": "C4_spiralSlide"
+},
+{
+"mesh": "Mesh/C4_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "C4_trashbag"
+},
+{
+"mesh": "Mesh/C4_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "C4_tree01"
+},
+{
+"mesh": "Mesh/C4_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "C4_tree02"
+},
+{
+"mesh": "Mesh/C4_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "C4_tree03"
+},
+{
+"mesh": "Mesh/C4_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C4_vehicles"
+},
+{
+"mesh": "Mesh/C4_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "C4_windowCar"
+},
+{
+"mesh": "Mesh/C4_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "C4_window"
+},
+{
+"mesh": "Mesh/D2_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "D2_bark01"
+},
+{
+"mesh": "Mesh/D2_barrierLight_geo.obj",
+"tex": "Texture2D/barrierLight_col.png",
+"name": "D2_barrierLight"
+},
+{
+"mesh": "Mesh/D2_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "D2_bush01"
+},
+{
+"mesh": "Mesh/D2_checker_geo.obj",
+"tex": "Texture2D/checker_col.png",
+"name": "D2_checker"
+},
+{
+"mesh": "Mesh/D2_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D2_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/D2_colourPaletteSuburbsOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D2_colourPaletteSuburbsOutline"
+},
+{
+"mesh": "Mesh/D2_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D2_colourPalette"
+},
+{
+"mesh": "Mesh/D2_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D2_detailGarbage"
+},
+{
+"mesh": "Mesh/D2_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "D2_detailGravel"
+},
+{
+"mesh": "Mesh/D2_detailShingles_geo.obj",
+"tex": "Texture2D/detailShingles_col.png",
+"name": "D2_detailShingles"
+},
+{
+"mesh": "Mesh/D2_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "D2_detailSiding"
+},
+{
+"mesh": "Mesh/D2_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D2_driveway"
+},
+{
+"mesh": "Mesh/D2_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "D2_foliage01"
+},
+{
+"mesh": "Mesh/D2_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "D2_rock01"
+},
+{
+"mesh": "Mesh/D2_screens_geo.obj",
+"tex": "Texture2D/screens_col.png",
+"name": "D2_screens"
+},
+{
+"mesh": "Mesh/D2_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "D2_signs"
+},
+{
+"mesh": "Mesh/D2_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "D2_trashbag"
+},
+{
+"mesh": "Mesh/D2_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "D2_tree01"
+},
+{
+"mesh": "Mesh/D2_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "D2_tree02"
+},
+{
+"mesh": "Mesh/D2_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "D2_tree03"
+},
+{
+"mesh": "Mesh/D2_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D2_vehicles"
+},
+{
+"mesh": "Mesh/D2_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "D2_windowCar"
+},
+{
+"mesh": "Mesh/D2_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D2_window"
+},
+{
+"mesh": "Mesh/D3_GarageDoor_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_GarageDoor"
+},
+{
+"mesh": "Mesh/D3_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "D3_bark01"
+},
+{
+"mesh": "Mesh/D3_barrierLight_geo.obj",
+"tex": "Texture2D/barrierLight_col.png",
+"name": "D3_barrierLight"
+},
+{
+"mesh": "Mesh/D3_brianBirdCarcass_geo.obj",
+"tex": "Texture2D/brianBirdCarcass_col.png",
+"name": "D3_brianBirdCarcass"
+},
+{
+"mesh": "Mesh/D3_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "D3_bush01"
+},
+{
+"mesh": "Mesh/D3_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/D3_colourPaletteSuburbs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_colourPaletteSuburbs"
+},
+{
+"mesh": "Mesh/D3_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_colourPalette"
+},
+{
+"mesh": "Mesh/D3_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_detailGarbage"
+},
+{
+"mesh": "Mesh/D3_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "D3_detailGravel"
+},
+{
+"mesh": "Mesh/D3_detailRoofing_geo.obj",
+"tex": "Texture2D/detailRoofing_dtl.png",
+"name": "D3_detailRoofing"
+},
+{
+"mesh": "Mesh/D3_detailRupert_geo.obj",
+"tex": "Texture2D/detailRupert_dtl.png",
+"name": "D3_detailRupert"
+},
+{
+"mesh": "Mesh/D3_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "D3_detailSiding"
+},
+{
+"mesh": "Mesh/D3_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_driveway"
+},
+{
+"mesh": "Mesh/D3_fence03_geo.obj",
+"tex": "Texture2D/fence03_col.png",
+"name": "D3_fence03"
+},
+{
+"mesh": "Mesh/D3_fences_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_fences"
+},
+{
+"mesh": "Mesh/D3_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "D3_foliage01"
+},
+{
+"mesh": "Mesh/D3_lawnChair_geo.obj",
+"tex": "Texture2D/lawnChair_col.png",
+"name": "D3_lawnChair"
+},
+{
+"mesh": "Mesh/D3_mayorStand_colourPaletteSuburbs_geo.obj",
+"tex": "Texture2D/colourPalette_col.png",
+"name": "D3_colourPalette"
+},
+{
+"mesh": "Mesh/D3_mayorStand_flower_geo.obj",
+"tex": "Texture2D/flower_col.png",
+"name": "D3_flower"
+},
+{
+"mesh": "Mesh/D3_mayorStand_mayorWestHere_geo.obj",
+"tex": "Texture2D/mayorWestHere_col.png",
+"name": "D3_mayorWestHere"
+},
+{
+"mesh": "Mesh/D3_mayorStand_podium_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_podium"
+},
+{
+"mesh": "Mesh/D3_mayorStand_townhallOfficeSign_geo.obj",
+"tex": "Texture2D/townhallOfficeSign_col.png",
+"name": "D3_townhallOfficeSign"
+},
+{
+"mesh": "Mesh/D3_paths_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_paths"
+},
+{
+"mesh": "Mesh/D3_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "D3_rock01"
+},
+{
+"mesh": "Mesh/D3_screens_geo.obj",
+"tex": "Texture2D/screens_col.png",
+"name": "D3_screens"
+},
+{
+"mesh": "Mesh/D3_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "D3_signs"
+},
+{
+"mesh": "Mesh/D3_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "D3_trashbag"
+},
+{
+"mesh": "Mesh/D3_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "D3_tree01"
+},
+{
+"mesh": "Mesh/D3_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "D3_tree02"
+},
+{
+"mesh": "Mesh/D3_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "D3_tree03"
+},
+{
+"mesh": "Mesh/D3_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_vehicles"
+},
+{
+"mesh": "Mesh/D3_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "D3_windowCar"
+},
+{
+"mesh": "Mesh/D3_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D3_window"
+},
+{
+"mesh": "Mesh/D4_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "D4_bark01"
+},
+{
+"mesh": "Mesh/D4_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "D4_bush01"
+},
+{
+"mesh": "Mesh/D4_bush02_geo.obj",
+"tex": "Texture2D/bush02_col.png",
+"name": "D4_bush02"
+},
+{
+"mesh": "Mesh/D4_checker_geo.obj",
+"tex": "Texture2D/checker_col.png",
+"name": "D4_checker"
+},
+{
+"mesh": "Mesh/D4_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/D4_colourPaletteSuburbs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_colourPaletteSuburbs"
+},
+{
+"mesh": "Mesh/D4_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_colourPalette"
+},
+{
+"mesh": "Mesh/D4_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_detailGarbage"
+},
+{
+"mesh": "Mesh/D4_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "D4_detailGravel"
+},
+{
+"mesh": "Mesh/D4_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "D4_detailSiding"
+},
+{
+"mesh": "Mesh/D4_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_driveway"
+},
+{
+"mesh": "Mesh/D4_fence03_geo.obj",
+"tex": "Texture2D/fence03_col.png",
+"name": "D4_fence03"
+},
+{
+"mesh": "Mesh/D4_fences_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_fences"
+},
+{
+"mesh": "Mesh/D4_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "D4_foliage01"
+},
+{
+"mesh": "Mesh/D4_paths_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_paths"
+},
+{
+"mesh": "Mesh/D4_screens_geo.obj",
+"tex": "Texture2D/screens_col.png",
+"name": "D4_screens"
+},
+{
+"mesh": "Mesh/D4_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "D4_signs"
+},
+{
+"mesh": "Mesh/D4_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "D4_trashbag"
+},
+{
+"mesh": "Mesh/D4_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "D4_tree01"
+},
+{
+"mesh": "Mesh/D4_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "D4_tree02"
+},
+{
+"mesh": "Mesh/D4_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "D4_tree03"
+},
+{
+"mesh": "Mesh/D4_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_vehicles"
+},
+{
+"mesh": "Mesh/D4_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "D4_windowCar"
+},
+{
+"mesh": "Mesh/D4_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "D4_window"
+},
+{
+"mesh": "Mesh/E2_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "E2_bark01"
+},
+{
+"mesh": "Mesh/E2_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "E2_bush01"
+},
+{
+"mesh": "Mesh/E2_bush02_geo.obj",
+"tex": "Texture2D/bush02_col.png",
+"name": "E2_bush02"
+},
+{
+"mesh": "Mesh/E2_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E2_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/E2_colourPaletteSuburbs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E2_colourPaletteSuburbs"
+},
+{
+"mesh": "Mesh/E2_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E2_detailGarbage"
+},
+{
+"mesh": "Mesh/E2_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "E2_detailGravel"
+},
+{
+"mesh": "Mesh/E2_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "E2_detailSiding"
+},
+{
+"mesh": "Mesh/E2_detailWindow_geo.obj",
+"tex": "Texture2D/detailWindow_dtl.png",
+"name": "E2_detailWindow"
+},
+{
+"mesh": "Mesh/E2_dimicoHouse_geo.obj",
+"tex": "Texture2D/dimicoHouse_col.png",
+"name": "E2_dimicoHouse"
+},
+{
+"mesh": "Mesh/E2_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E2_driveway"
+},
+{
+"mesh": "Mesh/E2_fence02_geo.obj",
+"tex": "Texture2D/fence02_col.png",
+"name": "E2_fence02"
+},
+{
+"mesh": "Mesh/E2_fence03_geo.obj",
+"tex": "Texture2D/fence03_col.png",
+"name": "E2_fence03"
+},
+{
+"mesh": "Mesh/E2_fences_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E2_fences"
+},
+{
+"mesh": "Mesh/E2_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "E2_foliage01"
+},
+{
+"mesh": "Mesh/E2_megPillowcaseOfSodaCans_geo.obj",
+"tex": "Texture2D/megPillowcaseOfSodaCans_col.png",
+"name": "E2_megPillowcaseOfSodaCans"
+},
+{
+"mesh": "Mesh/E2_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "E2_rock01"
+},
+{
+"mesh": "Mesh/E2_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "E2_tree01"
+},
+{
+"mesh": "Mesh/E2_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "E2_tree02"
+},
+{
+"mesh": "Mesh/E2_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "E2_tree03"
+},
+{
+"mesh": "Mesh/E2_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E2_window"
+},
+{
+"mesh": "Mesh/E3_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "E3_bark01"
+},
+{
+"mesh": "Mesh/E3_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "E3_bush01"
+},
+{
+"mesh": "Mesh/E3_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E3_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/E3_colourPaletteSuburbs_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E3_colourPaletteSuburbs"
+},
+{
+"mesh": "Mesh/E3_detailBush01_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E3_detailBush01"
+},
+{
+"mesh": "Mesh/E3_detailGarbage_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E3_detailGarbage"
+},
+{
+"mesh": "Mesh/E3_detailGravel_geo.obj",
+"tex": "Texture2D/detailGravel_dtl.png",
+"name": "E3_detailGravel"
+},
+{
+"mesh": "Mesh/E3_detailShingles_geo.obj",
+"tex": "Texture2D/detailShingles_col.png",
+"name": "E3_detailShingles"
+},
+{
+"mesh": "Mesh/E3_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "E3_detailSiding"
+},
+{
+"mesh": "Mesh/E3_driveway_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E3_driveway"
+},
+{
+"mesh": "Mesh/E3_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "E3_foliage01"
+},
+{
+"mesh": "Mesh/E3_paths_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E3_paths"
+},
+{
+"mesh": "Mesh/E3_signs_geo.obj",
+"tex": "Texture2D/signs_col.png",
+"name": "E3_signs"
+},
+{
+"mesh": "Mesh/E3_trashbag_geo.obj",
+"tex": "Texture2D/trashbag_col.png",
+"name": "E3_trashbag"
+},
+{
+"mesh": "Mesh/E3_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "E3_tree01"
+},
+{
+"mesh": "Mesh/E3_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "E3_tree02"
+},
+{
+"mesh": "Mesh/E3_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "E3_tree03"
+},
+{
+"mesh": "Mesh/E3_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E3_vehicles"
+},
+{
+"mesh": "Mesh/E3_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "E3_windowCar"
+},
+{
+"mesh": "Mesh/E3_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E3_window"
+},
+{
+"mesh": "Mesh/E4_bark01_geo.obj",
+"tex": "Texture2D/bark01_col.png",
+"name": "E4_bark01"
+},
+{
+"mesh": "Mesh/E4_bush01_geo.obj",
+"tex": "Texture2D/bush01_col.png",
+"name": "E4_bush01"
+},
+{
+"mesh": "Mesh/E4_colourPaletteOutline_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E4_colourPaletteOutline"
+},
+{
+"mesh": "Mesh/E4_colourPalette_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E4_colourPalette"
+},
+{
+"mesh": "Mesh/E4_detailRoofing_geo.obj",
+"tex": "Texture2D/detailRoofing_dtl.png",
+"name": "E4_detailRoofing"
+},
+{
+"mesh": "Mesh/E4_detailSiding_geo.obj",
+"tex": "Texture2D/detailSiding_dtl.png",
+"name": "E4_detailSiding"
+},
+{
+"mesh": "Mesh/E4_fences_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E4_fences"
+},
+{
+"mesh": "Mesh/E4_foliage01_geo.obj",
+"tex": "Texture2D/foliage01_col.png",
+"name": "E4_foliage01"
+},
+{
+"mesh": "Mesh/E4_rock01_geo.obj",
+"tex": "Texture2D/rock01_col.png",
+"name": "E4_rock01"
+},
+{
+"mesh": "Mesh/E4_tree01_geo.obj",
+"tex": "Texture2D/tree01_col.png",
+"name": "E4_tree01"
+},
+{
+"mesh": "Mesh/E4_tree02_geo.obj",
+"tex": "Texture2D/tree02_col.png",
+"name": "E4_tree02"
+},
+{
+"mesh": "Mesh/E4_tree03_geo.obj",
+"tex": "Texture2D/tree03_col.png",
+"name": "E4_tree03"
+},
+{
+"mesh": "Mesh/E4_vehicles_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E4_vehicles"
+},
+{
+"mesh": "Mesh/E4_windowCar_geo.obj",
+"tex": "Texture2D/windowCar_col.png",
+"name": "E4_windowCar"
+},
+{
+"mesh": "Mesh/E4_window_geo.obj",
+"tex": "Texture2D/colourPaletteSuburbs_col.png",
+"name": "E4_window"
+}
+],
+"ground": [
+"Mesh/B2_collisionGround_cement_geo.obj",
+"Mesh/B2_collisionGround_dirt_geo.obj",
+"Mesh/B2_collisionGround_grass_geo.obj",
+"Mesh/B3_collisionGround_cement_geo.obj",
+"Mesh/B3_collisionGround_dirt_geo.obj",
+"Mesh/B3_collisionGround_grass_geo.obj",
+"Mesh/B4_collisionGround_cement_geo.obj",
+"Mesh/B4_collisionGround_dirt_geo.obj",
+"Mesh/B4_collisionGround_grass_geo.obj",
+"Mesh/C2_collisionGround_cement_geo.obj",
+"Mesh/C2_collisionGround_dirt_geo.obj",
+"Mesh/C2_collisionGround_grass_geo.obj",
+"Mesh/C2_collisionGround_water_geo.obj",
+"Mesh/C3_collisionGround_cement_geo.obj",
+"Mesh/C3_collisionGround_dirt_geo.obj",
+"Mesh/C3_collisionGround_grass_geo.obj",
+"Mesh/C4_collisionGround_cement_geo.obj",
+"Mesh/C4_collisionGround_dirt_geo.obj",
+"Mesh/C4_collisionGround_grass_geo.obj",
+"Mesh/D2_collisionGround_cement_geo.obj",
+"Mesh/D2_collisionGround_dirt_geo.obj",
+"Mesh/D2_collisionGround_grass_geo.obj",
+"Mesh/D3_collisionGround_cement_geo.obj",
+"Mesh/D3_collisionGround_dirt_geo.obj",
+"Mesh/D3_collisionGround_grass_geo.obj",
+"Mesh/D4_collisionGround_cement_geo.obj",
+"Mesh/D4_collisionGround_dirt_geo.obj",
+"Mesh/D4_collisionGround_grass_geo.obj",
+"Mesh/E2_collisionGround_cement_geo.obj",
+"Mesh/E2_collisionGround_dirt_geo.obj",
+"Mesh/E2_collisionGround_grass_geo.obj",
+"Mesh/E3_collisionGround_cement_geo.obj",
+"Mesh/E3_collisionGround_dirt_geo.obj",
+"Mesh/E3_collisionGround_grass_geo.obj",
+"Mesh/E4_collisionGround_grass_geo.obj"
+],
+"wall": [
+"Mesh/B2_collisionInvisible_geo.obj",
+"Mesh/B2_collision_geo.obj",
+"Mesh/B3_collisionInvisible_geo.obj",
+"Mesh/B3_collision_geo.obj",
+"Mesh/B4_collisionInvisible_geo.obj",
+"Mesh/B4_collision_geo.obj",
+"Mesh/C2_collisionInvisible_geo.obj",
+"Mesh/C2_collision_geo.obj",
+"Mesh/C3_collisionInvisible_geo.obj",
+"Mesh/C3_collision_geo.obj",
+"Mesh/C4_collisionInvisible_geo.obj",
+"Mesh/C4_collision_geo.obj",
+"Mesh/D2_collisionInvisible_geo.obj",
+"Mesh/D2_collision_geo.obj",
+"Mesh/D3_collisionWater_geo.obj",
+"Mesh/D3_collision_geo.obj",
+"Mesh/D3_mayorStand_collisionInvisible_geo.obj",
+"Mesh/D3_mayorStand_collision_geo.obj",
+"Mesh/D4_collisionInvisible_geo.obj",
+"Mesh/D4_collision_geo.obj",
+"Mesh/E2_collisionInvisible_geo.obj",
+"Mesh/E2_collision_geo.obj",
+"Mesh/E3_collisionInvisible_geo.obj",
+"Mesh/E3_collision_geo.obj",
+"Mesh/E4_collision_geo.obj"
+]
+}
